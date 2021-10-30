@@ -21,8 +21,9 @@ app
   .get("/balance", async () => await DB.getBalance())
   .post("/payments", async (c: any) => {
     const body = await c.body;    
-    const operation = body.operation == "buy" ? DB.Operation.buy : DB.Operation.sell;
-    DB.addPayment(body.coinName, body.amount, operation, body.date);
+    const operation = body.side == "buy" ? DB.Operation.buy : DB.Operation.sell;
+    const amount = body.funds == undefined ? body.size : body.funds
+    DB.addPayment(body.product_id, amount, operation, body.created_at);
   })
   .post("/balance", async (c: any) => {
     const body = await c.body;
