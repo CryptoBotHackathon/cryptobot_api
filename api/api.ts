@@ -13,7 +13,7 @@ const config: CORSConfig = {
 };
 const app = new Application();
 app.use(cors(config));
-
+app.use(CORSConfig);
 const { args } = Deno;
 const DEFAULT_PORT = 8080;
 const argPort = parse(args).port;
