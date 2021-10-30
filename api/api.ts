@@ -1,10 +1,18 @@
 import { parse } from "https://deno.land/std@0.100.0/flags/mod.ts";
 import { Application } from "https://deno.land/x/abc@v1.3.1/mod.ts";
-import { DefaultCORSConfig, cors } from "https://deno.land/x/abc@v1.3.3/middleware/cors.ts";
+import {
+  CORSConfig,
+  cors,
+  HttpMethod,
+} from "https://deno.land/x/abc@v1.3.3/middleware/cors.ts";
 import * as DB from "./db.ts";
 
+const config: CORSConfig = {
+  allowOrigins: ["https://a.com", "https://b.com", "https://c.com"],
+  allowMethods: [HttpMethod.Get],
+};
 const app = new Application();
-app.use(cors(DefaultCORSConfig));
+app.use(cors(config));
 
 const { args } = Deno;
 const DEFAULT_PORT = 8080;
