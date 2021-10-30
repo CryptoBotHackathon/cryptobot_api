@@ -8,8 +8,8 @@ import {
 import * as DB from "./db.ts";
 
 const config: CORSConfig = {
-  allowOrigins: ["https://a.com", "https://b.com", "https://c.com"],
-  allowMethods: [HttpMethod.Get],
+  allowOrigins: ["*"],
+  allowMethods: [HttpMethod.Get, HttpMethod.Post],
 };
 const app = new Application();
 app.use(cors(config));
