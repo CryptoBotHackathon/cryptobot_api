@@ -15,9 +15,9 @@ console.log(`Listening on Port: ${PORT}`);
 console.log(`http://localhost:${PORT}/`);
 
 app
-  .get("/payment", async () => await DB.getPayments())
+  .get("/payments", async () => await DB.getPayments())
   .get("/balance", async () => await DB.getBalance())
-  .post("/payment", async (c: any) => {
+  .post("/payments", async (c: any) => {
     const body = await c.body;    
     const operation = body.operation == "buy" ? DB.Operation.buy : DB.Operation.sell;
     DB.addPayment(body.coinName, body.amount, operation, body.date);
