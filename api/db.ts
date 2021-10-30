@@ -34,7 +34,7 @@ await client.connect({
 	},
 });
 
-enum Operation {
+export enum Operation {
 	buy,
 	sell
 }

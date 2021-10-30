@@ -15,11 +15,13 @@ console.log(`Listening on Port: ${PORT}`);
 console.log(`http://localhost:${PORT}/`);
 
 app
-  .get(
-    "/",
-    () =>
-      "https://secret-ocean-93187.herokuapp.com/executable\nhttps://secret-ocean-93187.herokuapp.com/project\nhttps://secret-ocean-93187.herokuapp.com/module\nhttps://secret-ocean-93187.herokuapp.com/number"
-  )
+  .get("/payment", async () => await DB.getPayments())
+  .get("/balance", async () => await DB.getBalance())
+  .post("/payment", async (c: any) => {
+    const body = await c.body;    
+    const operation = body.operation == "buy" ? DB.Operation.buy : DB.Operation.sell;
+    DB.addPayment(body.coinName, body.amount, operation, body.date);
+  })
   .post("/balance", async (c: any) => {
     const body = await c.body;
     DB.addBalance(body.balance, body.date);
